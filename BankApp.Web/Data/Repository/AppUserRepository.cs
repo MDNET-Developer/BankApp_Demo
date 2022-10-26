@@ -1,12 +1,12 @@
 ﻿using BankApp.Web.Data.Context;
 using BankApp.Web.Data.Entities;
-using BankApp.Web.Models;
+using BankApp.Web.Data.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BankApp.Web.Data.Repository
 {
-    public class AppUserRepository
+    public class AppUserRepository: IAppUserRepository
     {
         private readonly BankContext _bankContext;
 

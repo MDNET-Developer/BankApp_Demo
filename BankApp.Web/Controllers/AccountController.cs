@@ -1,5 +1,6 @@
 ﻿using BankApp.Web.Data.Context;
 using BankApp.Web.Data.Entities;
+using BankApp.Web.Data.Repository;
 using BankApp.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,11 @@ namespace BankApp.Web.Controllers
     public class AccountController : Controller
     {
         private readonly BankContext _bankContext;
-
+   
         public AccountController(BankContext bankContext)
         {
             _bankContext = bankContext;
+           
         }
         [HttpGet]
         public IActionResult Create(int id)
