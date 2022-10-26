@@ -1,0 +1,29 @@
+﻿
+@model BankApp.Web.Models.UserListViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_BankLayout.cshtml";
+}
+<div>
+    <h1>Istifadəçi haqqında</h1>
+    <hr />
+    <div>
+        <p><strong>İstifadəçi adı:</strong> @Model.MName</p>
+        <p><strong>İstifadəçi soyadı: </strong>@Model.MSurname</p>
+        <p><strong>Aktiv hesab sayı:</strong> <getaccountcount style="background-color:darkorange;" application-user-con-id="@Model.MId"></getaccountcount></p>
+    </div>
+    <br />
+    <div>
+        <form asp-action="Create" asp-controller="Account">
+            <input type="hidden" name="MApplicationUserID" value="@Model.MId" />
+            <p>Hesab nömrəsi</p>
+            <input type="number" name="MAccountNumber" class="form-control" />
+            <p>Balans</p>
+            <input type="number" class="form-control" name="MBalance" />
+            <br />
+          <button class="btn btn-outline-secondary">Yeni hesab əlavə et</button>
+        </form>
+    </div>
+</div>
+
+

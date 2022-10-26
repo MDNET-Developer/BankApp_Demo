@@ -146,3 +146,4 @@ D:\MyProjects\NEW\BankApp.Web\BankApp.Web\bin\Debug\net5.0\runtimes\win-arm64\li
 D:\MyProjects\NEW\BankApp.Web\BankApp.Web\obj\Debug\net5.0\Razor\Views\Shared\_BankLayout.cshtml.g.cs
 D:\MyProjects\NEW\BankApp.Web\BankApp.Web\obj\Debug\net5.0\Razor\Views\Bank\Index.cshtml.g.cs
 D:\MyProjects\NEW\BankApp.Web\BankApp.Web\bin\Debug\net5.0\libman.json
+D:\MyProjects\NEW\BankApp.Web\BankApp.Web\obj\Debug\net5.0\Razor\Views\Account\Create.cshtml.g.cs

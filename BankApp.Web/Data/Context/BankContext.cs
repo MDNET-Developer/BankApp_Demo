@@ -8,7 +8,6 @@ namespace BankApp.Web.Data.Context
     {
         public BankContext(DbContextOptions<BankContext> options):base(options)
         {
-
         }
 
         public DbSet<Account> Accounts { get; set; }
