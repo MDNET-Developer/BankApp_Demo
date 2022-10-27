@@ -33,7 +33,9 @@ namespace BankApp.Web
                 opt.UseSqlServer("server=DESKTOP-LV07HAI;database=Db_BankApp;integrated security=true");
             });
             services.AddScoped<IAppUserRepository, AppUserRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUserMapper, UserMapper>();
+            services.AddScoped<IAccountMapper, AccountMapper>();
             services.AddControllersWithViews();
         }
 
@@ -61,7 +63,7 @@ namespace BankApp.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Bank}/{action=Index}/{id?}");
             });
         }
     }
