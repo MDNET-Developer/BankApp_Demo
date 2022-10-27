@@ -1,5 +1,6 @@
 ﻿using BankApp.Web.Data.Context;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BankApp.Web.Data.Interfaces
 {
@@ -14,5 +15,6 @@ namespace BankApp.Web.Data.Interfaces
         public List<T> Getall();
 
         public T GetbyId(int id);
+        IQueryable<T> GetQueryable();
     }
 }

@@ -13,19 +13,28 @@ namespace BankApp.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly BankContext _bankContext;
-        private readonly IAppUserRepository _appUserRepository;
-        private readonly IUserMapper _userMapper;
-        private readonly IAccountMapper _accountMapper;
-        private readonly IAccountRepository _accountRepository;
-        public AccountController(BankContext bankContext, IAppUserRepository appUserRepository, IUserMapper userMapper, IAccountMapper accountMapper, IAccountRepository accountRepository)
+        //private readonly BankContext _bankContext;
+        //private readonly IAppUserRepository _appUserRepository;
+        //private readonly IUserMapper _userMapper;
+        //private readonly IAccountMapper _accountMapper;
+        //private readonly IAccountRepository _accountRepository;
+        //public AccountController(BankContext bankContext, IAppUserRepository appUserRepository, IUserMapper userMapper, IAccountMapper accountMapper, IAccountRepository accountRepository)
+        //{
+        //    _bankContext = bankContext;
+        //    _appUserRepository = appUserRepository;
+        //    _userMapper = userMapper;
+        //    _accountMapper = accountMapper;
+        //    _accountRepository = accountRepository;
+        //}
+        private readonly IGenericRepository<Account> _accountRepository;
+        private readonly IGenericRepository<ApplicationUser> _userRepository;
+
+        public AccountController(IGenericRepository<Account> accountRepository, IGenericRepository<ApplicationUser> userRepository)
         {
-            _bankContext = bankContext;
-            _appUserRepository = appUserRepository;
-            _userMapper = userMapper;
-            _accountMapper = accountMapper;
             _accountRepository = accountRepository;
+            _userRepository = userRepository;
         }
+
         [HttpGet]
         public IActionResult Create(int id)
         {
@@ -35,8 +44,14 @@ namespace BankApp.Web.Controllers
             //    MName = x.Name,
             //    MSurname = x.Surname
             //}).SingleOrDefault(x => x.MId == id);
-            var userinfo = _userMapper.MapToUserList(_appUserRepository.GetId(id));
-            return View(userinfo);
+            //var userinfo = _userMapper.MapToUserList(_appUserRepository.GetId(id));
+            var userinfo = _userRepository.GetbyId(id);
+            return View(new UserListViewModel
+            {
+                MId=userinfo.Id,
+                MName=userinfo.Name,
+                MSurname=userinfo.Surname
+            });
         }
         [HttpPost]
         public IActionResult Create(AccountCreateModel accountCreateModel)
@@ -50,8 +65,22 @@ namespace BankApp.Web.Controllers
 
             //});
             //_bankContext.SaveChanges();
-            _accountRepository.Create(_accountMapper.Map(accountCreateModel));
+            //_accountRepository.Create(_accountMapper.Map(accountCreateModel));
+            _accountRepository.Create(new Account
+            {
+                AccountNumber = accountCreateModel.MAccountNumber,
+                Balance=accountCreateModel.MBalance,
+                ApplicationUserId=accountCreateModel.MApplicationUserId
+            });
             return RedirectToAction("Index","Bank");
+        }
+
+        [HttpGet]
+        public IActionResult GetByUserId(int userid)
+        {
+            var query = _accountRepository.GetQueryable();
+            var account = query.Where(x => x.ApplicationUserId == userid);
+            return View(account);
         }
     }
 }

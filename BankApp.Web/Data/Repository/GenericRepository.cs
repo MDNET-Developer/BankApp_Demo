@@ -40,5 +40,10 @@ namespace BankApp.Web.Data.Repository
         {
             return _bankContext.Set<T>().Find(id);
         }
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _bankContext.Set<T>().AsQueryable();
+        }
     }
 }
